@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PDF</title>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style type="text/css">
+    .pdf-container{
+      position: relative;
+    }
+    .pdf-wrapper{
+      height: 500px;
+      overflow-y: scroll;
+    }
+    .pdf-annotation{
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background-color: transparent;
+      border: 3px solid rgba(0,0,0,0.9);
+      margin-top: -5px;
+      margin-left: -3px;
+    }
+    .pdf-annotation:hover,.pdf-annotation:focus,.pdf-annotation.highlight{
+      border-color: orangered;
+      background-color: rgba(255,255,255,0.5)
+    }
+    ul.list > li.highlight{
+      background-color: lightgray;
+    }
+    ul.list li{
+      cursor: pointer;
+    }
+    canvas{
+      cursor: copy;
+    }
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.303/pdf.min.js"></script>  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.303/pdf.worker.min.js"></script>
+  <script src="myscript.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row m-2">
+      <div class="col-3">
+        select pdf : 
+      </div>
+      <div class="col-9">
+        <input type="file" class="btn-sm" name="pdf" accept="application/pdf">
+      </div>
+    </div>
+    <div class="row" id="pdf-main-container" style="display:none;">
+      <div class="col">
+        <h4>Annotation</h4>
+        <ul class="list" title="Annotation">
+        </ul>
+      </div>
+      <div class="col">
+        <div class="pdf-wrapper">
+          <div id="pdf-loader">Loading document ...</div>
+          <div id="pdf-contents">
+            <div class="pdf-container border">
+            <canvas id="pdf-canvas"></canvas>
+            </div>
+            <div id="page-loader">Loading page ...</div>
+          </div>
+        </div>
+        <div id="pdf-meta" class="row text-center m-2">
+            <div id="pdf-buttons" class="col">
+                <button id="pdf-prev" class="btn btn-sm btn-primary">Previous</button>
+                <button id="pdf-next" class="btn btn-sm btn-primary">Next</button>
+            </div>
+            <div id="page-count-container" class="col">Page <span id="pdf-current-page"></span> of <span id="pdf-total-pages"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
